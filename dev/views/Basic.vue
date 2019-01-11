@@ -22,6 +22,10 @@
         </div>
       </div>
     </div>
+    <h3>HTML code</h3>
+    <div class="margin:2em;">
+        <textarea v-model="content" rows="5" style="width:100%;"></textarea>
+    </div>
   </div>
 </template>
 

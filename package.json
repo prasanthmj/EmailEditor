@@ -40,13 +40,14 @@
     "conventional-changelog-cli": "^2.0.1",
     "cz-conventional-changelog": "^2.1.0",
     "gh-pages": "^0.12.0",
+    "highlight.js-cli": "^0.1.0",
     "node-sass": "^4.7.2",
     "poi": "^9.6.13",
     "quill-image-drop-module": "^1.0.3",
-    "quill-image-resize-module": "^3.0.0",
     "release-it": "^7.4.8",
     "sass-loader": "^6.0.6",
-    "spectre.css": "^0.2.12"
+    "spectre.css": "^0.2.12",
+    "vue-router": "^3.0.2"
   },
   "license": "MIT",
   "dependencies": {

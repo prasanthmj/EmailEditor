@@ -1,11 +1,15 @@
 <template>
   <div id="app">
       <nav>
-        <router-link to="/">Dashboard</router-link>
-        <router-link to="/basic">Basic Example</router-link>
-        <router-link to="/modules">Adding Modules</router-link>
-        <router-link to="/images">Images Example</router-link>
-        <router-link to="/syntax-highlighting">Syntax Highlighting Example</router-link>
+        <ul>
+        <li><router-link to="/">Dashboard</router-link></li>
+        <li><router-link to="/basic">Basic Example</router-link></li>
+        <li><router-link to="/modules">Adding Modules</router-link></li>
+        <li><router-link to="/toolbar">Custom Toolbar</router-link></li>
+        <li><router-link to="/images">Images Example</router-link></li>
+        <li><router-link to="/syntax-highlighting">Syntax Highlighting Example</router-link></li>
+        
+        </ul>
       </nav>
     <router-view/>
   </div>
@@ -28,5 +32,11 @@
 .ql-disabled {
   opacity: 0.5;
   background: rgba(153, 153, 153, 0.2);
+}
+nav ul li 
+{
+  display:inline-block;
+  list-style: none;
+  margin-right:8px;
 }
 </style>

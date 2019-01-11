@@ -5,6 +5,7 @@ import SyntaxHighlighting from "./views/SyntaxHighlighting.vue";
 import Dashboard from "./views/Dashboard.vue";
 import Modules from "./views/Modules.vue";
 import Images from "./views/Images.vue";
+import CustomToolbar from "./views/CustomToolbar.vue";
 
 Vue.use(Router);
 
@@ -24,6 +25,11 @@ export default new Router({
       path: "/modules",
       name: "modules",
       component: Modules
+    },
+    {
+      path: "/toolbar",
+      name: "modules",
+      component: CustomToolbar
     },
     {
       path: "/images",
