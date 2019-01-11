@@ -7,6 +7,7 @@
         <li><router-link to="/modules">Adding Modules</router-link></li>
         <li><router-link to="/toolbar">Custom Toolbar</router-link></li>
         <li><router-link to="/images">Images Example</router-link></li>
+        <li><router-link to="/email">Email Editor</router-link></li>
         <li><router-link to="/syntax-highlighting">Syntax Highlighting Example</router-link></li>
         
         </ul>

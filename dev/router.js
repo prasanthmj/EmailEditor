@@ -6,6 +6,7 @@ import Dashboard from "./views/Dashboard.vue";
 import Modules from "./views/Modules.vue";
 import Images from "./views/Images.vue";
 import CustomToolbar from "./views/CustomToolbar.vue";
+import EmailEditor from "./views/EmailEditor.vue";
 
 Vue.use(Router);
 
@@ -28,8 +29,13 @@ export default new Router({
     },
     {
       path: "/toolbar",
-      name: "modules",
+      name: "toolbar",
       component: CustomToolbar
+    },
+    {
+      path: "/email",
+      name: "email",
+      component: EmailEditor
     },
     {
       path: "/images",

@@ -20,7 +20,7 @@
 <script>
 import hljs from "highlight.js";
 import "highlight.js/styles/monokai-sublime.css";
-import { VueEditor, Quill } from "../../src/index.js";
+import  VueEditor from "../../src/index.js";
 
 export default {
   components: { VueEditor },

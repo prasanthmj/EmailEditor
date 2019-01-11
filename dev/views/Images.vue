@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import { VueEditor, Quill } from "../../src/index.js";
+import  VueEditor from "../../src/index.js";
 import axios from "axios";
 const CLIENT_ID = "993793b1d8d3e2e";
 

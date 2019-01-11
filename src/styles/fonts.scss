@@ -1,0 +1,111 @@
+ .ql-font span[data-value="sans-serif"]::before {
+    font-family: arial, helvetica, "sans-serif";
+    content: "Sans Serif" !important;
+  }
+  
+   .ql-font span[data-value="serif"]::before {
+    font-family: "times new roman", "serif";
+    content: "Serif" !important;
+  }
+  
+   .ql-font span[data-value="fixed-width"]::before {
+    font-family: monospace;
+    content: "Fixed Width" !important; 
+  }
+
+   .ql-font span[data-value="wide"]::before {
+    font-family: "Arial black", "sans-serif";
+    content: "Wide" !important; 
+  }
+
+   .ql-font span[data-value="narrow"]::before {
+    font-family: "Arial Narrow", "sans-serif";
+    content: "Narrow" !important; 
+  }
+
+   .ql-font span[data-value="comic-sans"]::before {
+    font-family: "comic sans ms", "sans-serif";
+    content: "Comic Sans MS" !important; 
+  }
+
+   .ql-font span[data-value="garamond"]::before {
+    font-family: "Garamond","serif";
+    content: "Garamond" !important; 
+  }
+
+  .ql-font span[data-value="georgea"]::before {
+    font-family: "Georgea","serif";
+    content: "Georgea" !important; 
+  }
+
+  .ql-font span[data-value="tahoma"]::before {
+    font-family: "Tahoma","sans-serif";
+    content: "Tahoma" !important; 
+  }
+
+  .ql-font span[data-value="trebuchet"]::before {
+    font-family: "trebuchet ms", "sans-serif";
+    content: "Trebuchet MS" !important; 
+  }
+ .ql-font span[data-value="verdana"]::before {
+    font-family: "verdana", "sans-serif";
+    content: "Verdana" !important; 
+  } 
+  /* Set content font-families */
+  
+  .ql-font-sans-serif {
+    font-family: arial, helvetica, "sans-serif";
+  }
+  
+  .ql-font-serif {
+    font-family: "times new roman", "serif";
+  }
+  
+  .ql-font-fixed-width {
+    font-family: monospace;
+  }
+
+  .ql-font-wide {
+    font-family: "Arial Black",sans-serif;
+  }  
+
+  .ql-font-narrow {
+    font-family: "Arial Narrow",sans-serif;
+  }   
+
+ .ql-font-comic-sans {
+    font-family: "comic sans ms", "sans-serif";
+  }      
+ .ql-font-garamond {
+    font-family: "Garamond", "serif";
+  }        
+.ql-font-georgea {
+    font-family: "Georgea","serif";
+  } 
+ .ql-font-tahoma {
+    font-family: "Tahoma","sans-serif";
+  }    
+.ql-font-trebuchet {
+    font-family: "trebuchet ms", "sans-serif";
+  }
+.ql-font-verdana {
+    font-family: "verdana", "sans-serif";
+  }     
+
+.quillWrapper .ql-snow .ql-picker.ql-font 
+{
+    width: 140px;
+} 
+.ql-toolbar.ql-snow .ql-formats
+{
+  margin-right: 3px;
+}
+.ql-snow .ql-picker.ql-size 
+{
+    width: 90px;
+}
+
+.ql-snow .button + .button, button + button
+{
+    margin-left: 5px;
+}

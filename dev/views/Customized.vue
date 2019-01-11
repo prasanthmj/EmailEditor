@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { VueEditor, Quill } from "../../src/index.js";
+import VueEditor from "../../src/index.js";
 
 export default {
   components: { VueEditor },

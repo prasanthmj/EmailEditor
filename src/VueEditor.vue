@@ -8,12 +8,22 @@
 
 <script>
 import _Quill from "quill";
-import defaultToolbar from "./helpers/default-toolbar";
+//import defaultToolbar from "./helpers/default-toolbar";
 import merge from "lodash.merge";
 import oldApi from "./helpers/old-api";
 import MarkdownShortcuts from "./helpers/markdown-shortcuts";
 
+import myToolbar from './helpers/mytoolbar.js';
+import BlotFormatter, { DeleteAction, ResizeAction, ImageSpec } from 'quill-blot-formatter';
+import ImageExtractor from './helpers/ImageExtractor';
+
 const Quill = window.Quill || _Quill;
+
+class CustomImageSpec extends ImageSpec {
+    getActions() {
+        return [ResizeAction, DeleteAction];
+    }
+}
 
 export default {
   name: "VueEditor",
@@ -47,7 +57,18 @@ export default {
     useMarkdownShortcuts: {
       type: Boolean,
       default: false
-    }
+    },
+    noImage:{
+      type:Boolean,
+      default:false
+    },
+    proxy:{
+        type: Object,
+        default: function () 
+        {
+        return {};
+        }
+      }
   },
 
   data: () => ({
@@ -58,10 +79,12 @@ export default {
     this.registerCustomModules(Quill);
     this.registerPrototypes();
     this.initializeEditor();
+    this.initProxy();
   },
 
   methods: {
     initializeEditor() {
+      this.$emit("register",Quill);
       this.setupQuillEditor();
       this.checkForCustomImageHandler();
       this.handleInitialContent();
@@ -70,6 +93,11 @@ export default {
     },
 
     setupQuillEditor() {
+      if(this.noImage)
+      {
+        this.modules['toolbar'][3]=['link'];
+      }
+
       let editorConfig = {
         debug: false,
         modules: this.setModules(),
@@ -82,17 +110,26 @@ export default {
       this.quill = new Quill(this.$refs.quillContainer, editorConfig);
     },
 
-    setModules() {
+    setModules() 
+    {
       let modules = {
-        toolbar: this.editorToolbar ? this.editorToolbar : defaultToolbar
+        toolbar: this.editorToolbar ? this.editorToolbar : myToolbar,
+        blotFormatter: { specs: [ CustomImageSpec] }
       };
       if (this.useMarkdownShortcuts) {
         Quill.register("modules/markdownShortcuts", MarkdownShortcuts, true);
         modules["markdownShortcuts"] = {};
       }
+
+      var Font = Quill.import('formats/font');
+      // We do not add Sans Serif since it is the default
+      Font.whitelist = myToolbar[0][0].font;
+      Quill.register(Font, true);
+      Quill.register('modules/blotFormatter', BlotFormatter);
+
       return modules;
     },
-
+    
     prepareEditorConfig(editorConfig) {
       if (
         Object.keys(this.editorOptions).length > 0 &&
@@ -170,6 +207,72 @@ export default {
       let range = Editor.getSelection();
       let cursorLocation = range.index;
       this.$emit("imageAdded", file, Editor, cursorLocation, resetUploader);
+    },
+
+    getContentHTML()
+    {
+      var QuillDeltaToHtmlConverter = require('quill-delta-to-html').QuillDeltaToHtmlConverter;
+
+      var cfg = {
+          inlineStyles:
+          {
+              font: function(value, b)
+              {
+                  var mapping = 
+                  {
+                    'sans-serif': "font-family: arial, helvetica, 'sans-serif'",
+                    'serif': "font-family: 'times new roman', 'serif'",
+                    'fixed-width': "font-family: monospace",
+                    'wide': "font-family: 'Arial black','sans-serif'",
+                    'narrow': "font-family: 'Arial Narrow','sans-serif'",
+                    'comic-sans': "font-family: 'comic sans ms','sans-serif'",
+                    'garamond': "font-family: garamond, serif",
+                    'georgea': "font-family: georgia, serif",
+                    'tahoma': "font-family: tahoma, sans-serif",
+                    'trebuchet': "font-family: trebuchet ms, sans-serif",
+                    'verdana': "font-family: verdana, sans-serif"
+                  };
+
+                  var ret = mapping[value];
+
+                  return ret;
+              }
+
+          }
+      };
+      let delta = this.quill.getContents();
+
+      var ops = JSON.parse(JSON.stringify(delta.ops));
+      var converter = new QuillDeltaToHtmlConverter(ops, cfg);
+
+      var ret = '<div style="font-family:arial, helvetica, \'sans-serif\'; font-size:16px; line-height:1.42; text-align:left; white-space:pre-wrap; width:100%;">';
+      ret += converter.convert();
+      ret += '</div>';
+        
+      return ret;     
+    },
+    initProxy()
+    {
+      
+      this.proxy.insert = function(txt)
+      {
+          this.quill.focus();
+          var range = this.quill.getSelection();
+          this.quill.pasteHTML(range.index, txt);
+      }.bind(this);
+
+      this.proxy.getHTML = function()
+      {
+        return this.getContentHTML();
+      }.bind(this);
+
+      this.proxy.getEmail = function()
+      {
+          let html = this.proxy.getHTML();
+          let extractor = new ImageExtractor();
+          return extractor.extract(html);
+      }.bind(this);
+
     }
   },
 
@@ -191,7 +294,6 @@ export default {
 };
 </script>
 
-<style src="quill/dist/quill.snow.css">
-</style>
-<style src="./styles/vue2-editor.scss" lang='scss'>
-</style>
+<style src="quill/dist/quill.snow.css"></style>
+<style src="./styles/vue2-editor.scss" lang='scss'></style>
+<style src="./styles/fonts.scss" lang='scss'></style>
