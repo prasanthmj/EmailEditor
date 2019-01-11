@@ -56,15 +56,4 @@
     "quill-blot-formatter": "^1.0.5",
     "quill-delta-to-html": "^0.10.7"
   }
-  /*,
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
-    }
-  }
-  ,
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org/"
-  }
-  */
 }
