@@ -2,7 +2,7 @@
 	<div>
 	<h4>Body:</h4>
     <div class="aligner">
-    <vue-editor :proxy="eeditor"  ></vue-editor>
+    <vue-editor :proxy="eeditor"  :no-image="true"></vue-editor>
     </div>
     
     <div>

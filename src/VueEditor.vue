@@ -93,10 +93,7 @@ export default {
     },
 
     setupQuillEditor() {
-      if(this.noImage)
-      {
-        this.modules['toolbar'][3]=['link'];
-      }
+      
 
       let editorConfig = {
         debug: false,
@@ -105,6 +102,11 @@ export default {
         placeholder: this.placeholder ? this.placeholder : "",
         readOnly: this.disabled ? this.disabled : false
       };
+
+      if(this.noImage)
+      {
+        editorConfig.modules['toolbar'][3]=['link'];
+      }
 
       this.prepareEditorConfig(editorConfig);
       this.quill = new Quill(this.$refs.quillContainer, editorConfig);
